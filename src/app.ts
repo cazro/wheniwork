@@ -5,7 +5,7 @@ import session from "express-session";
 import MemoryStore from "memorystore";
 import bodyParser from "body-parser";
 import lusca from "lusca";
-import flash from "express-flash-messages";
+import flash from "express-flash";
 import path from "path";
 import passport from "passport";
 import expressValidator from "express-validator";
