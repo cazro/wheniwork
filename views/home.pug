@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  if user
+    #mainContainer
+        include partials/schedule/shifts
+  else
+    h1 Welcome
+    hr
+    .row
+      .col-sm-8
+        p You will need to log-in using your work email and When I Work.com password before you can access the schedule.
+        include partials/login-form

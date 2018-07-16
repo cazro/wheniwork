@@ -1,0 +1,84 @@
+- var users = schedule.users;
+- var shifts = schedule.shifts;
+- var requests = schedule.requests;
+- var positions = schedule.positions;
+- var start = new Date(schedule.start);
+- var n = 0;
+- var s = 0;
+- var found = false;
+- var weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+- var month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+- var month_short = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+table#schedule.table.table-bordered.table-condensed
+    thead
+        tr.users
+            th.date Date
+            each val, index in users
+                th.user(style={width:100/(users.length+1) + "%"})=val.first_name + " "
+                    .name=val.last_name.toUpperCase()
+    tbody
+        while n < schedule.daysCount
+            - var now = new Date(start.getFullYear(),start.getMonth(), start.getDate() + n)
+            tr.day(class=weekday[now.getDay()])
+                td.date= weekday[now.getDay()].toUpperCase()+" "+month_short[now.getMonth()]+" "+now.getDate()
+                each user in users
+                    each shift, shInd in shifts
+                        - var st = new Date(shift.start_time);
+                        - var shiftDate = new Date(st.getFullYear(),st.getMonth(),st.getDate());
+                        if shiftDate.toDateString() != now.toDateString()
+                            - break;
+                        if shift.user_id == user.id && shiftDate.toDateString() == now.toDateString()
+                            each position in positions
+                                if position.id == shift.position_id
+                                    - var color = shift.color;
+                                    - var r = parseInt(color.substring(0,2),16);
+                                    - var g = parseInt(color.substring(2,4),16);
+                                    - var b = parseInt(color.substring(4,6),16);
+                                    td.shift(style={background: "rgba("+r+","+g+","+b+",0.5)"})
+                                        p= position.name.toUpperCase()
+                                        //.shift(style={background: "rgba("+r+","+g+","+b+",0.5)"})
+                                            //p= position.name.toUpperCase()
+                                    - shifts.splice(shInd,1);
+                                    - found = true;
+                                    - break;
+                        if found
+                            - break;
+                    if found
+                        - found = false;
+                    else
+                        td.shift
+            - n++
+- n=0
+table#requests.table.table-bordered.table-condensed(style={display: "none"})
+    thead
+        tr.users
+            th.date Date
+            each val, index in users
+                th.user(style={width:100/(users.length+1) + "%"})=val.first_name + " "
+                    .name=val.last_name.toUpperCase()
+    tbody
+        while n < schedule.daysCount
+            - var now = new Date(start.getFullYear(),start.getMonth(), start.getDate() + n)
+            tr.day(class=weekday[now.getDay()])
+                td.date= weekday[now.getDay()].toUpperCase()+" "+month_short[now.getMonth()]+" "+now.getDate()
+                each user in users
+                    each request, reqInd in requests
+                        - var st = new Date(request.start_time);
+                        - var et = new Date(request.end_time);
+                        - var requestStartDate = new Date(st.getFullYear(),st.getMonth(),st.getDate());
+                        - var requestEndDate = new Date(et.getFullYear(),et.getMonth(),et.getDate());
+                        //if Date.parse(requestEndDate) < Date.parse(now)
+                            //- requests.splice(reqInd,1);
+                        if request.user_id == user.id && Date.parse(requestStartDate) <= Date.parse(now) && Date.parse(now) <= Date.parse(requestEndDate)
+                            td.shift(style={background: "red"})
+                                p #{user.first_name[0].toUpperCase()}#{user.last_name.substring(0,2).toUpperCase()}
+                            - found = true;
+                            - break;
+                        if found
+                            - break;
+                    if found
+                        - found = false;
+                    else
+                        td.shift
+            - n++

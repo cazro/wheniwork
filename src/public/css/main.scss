@@ -1,0 +1,125 @@
+@import "themes/iba/variables";
+
+@import "lib/bootstrap/bootstrap";
+@import "lib/font-awesome/font-awesome";
+
+@import "themes/iba/iba";
+
+// Scaffolding
+// -------------------------
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: 60px;
+  margin-bottom: 75px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+
+  p, ul {
+    margin-bottom: 0;
+  }
+}
+
+// Input Fields
+// -------------------------
+
+textarea {
+  resize: vertical;
+}
+
+// Navbar
+// -------------------------
+
+.navbar-nav img {
+  width: 30px;
+  height: 30px;
+  margin: -15px 15px -15px;
+}
+
+.navbar-brand {
+    //background: rgba(140,198,62,.85);
+}
+
+// Alerts
+// -------------------------
+
+.alert {
+  margin-top: 20px;
+}
+
+// Shifts
+// -------------------------
+//$weekend: lighten($brand-primary, 40%);
+$weekend: #dedede;
+
+.date {
+    font-weight:bold;
+    font-size: 1.1em;
+    width: 7em;
+}
+
+.name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.shift {
+    border-radius: 3px;
+    height:100%;
+    
+    p {
+        color: #000;
+        font-size:1.2em;
+        font-weight: bolder;
+        text-align: center;
+        margin: 0 0 0 0px;
+    }
+}
+
+.user,.shift {
+
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing:2px;
+  vertical-align: middle;
+}
+
+.Sun,.Sat{
+    //.date{
+        background-color: $weekend;
+    //}
+}
+
+.updating {
+    opacity: .2;
+}
+
+.table-condensed td {
+    padding: 0 2px 0 2px !important;
+}
+// Thumbnails
+// -------------------------
+
+.thumbnail {
+  padding: 0;
+  border-radius: 0;
+  box-shadow: 0 0 5px #ccc, inset 0 0 0 #000;
+}
+
+// Font Icons
+// -------------------------
+
+.fa {
+  margin-right: 6px;
+}

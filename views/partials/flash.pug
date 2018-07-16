@@ -1,0 +1,20 @@
+- var messages = getMessages()
+
+if messages.errors
+  .alert.alert-danger.fade.in
+    button.close(type='button', data-dismiss='alert')
+      i.fa.fa-times-circle-o
+    each error in messages.errors
+      div= error
+if messages.info
+  .alert.alert-info.fade.in
+    button.close(type='button', data-dismiss='alert')
+      i.fa.fa-times-circle-o
+    each info in messages.info
+      div= info
+if messages.success
+  .alert.alert-success.fade.in
+    button.close(type='button', data-dismiss='alert')
+      i.fa.fa-times-circle-o
+    each success in messages.success
+      div= success
