@@ -13,7 +13,7 @@
 table#schedule.table.table-bordered.table-condensed
     thead
         tr.users
-            th.date Date
+            th.date
             each val, index in users
                 th.user(style={width:100/(users.length+1) + "%"})=val.first_name + " "
                     .name=val.last_name.toUpperCase()
@@ -21,7 +21,7 @@ table#schedule.table.table-bordered.table-condensed
         while n < schedule.daysCount
             - var now = new Date(start.getFullYear(),start.getMonth(), start.getDate() + n)
             tr.day(class=weekday[now.getDay()])
-                td.date= weekday[now.getDay()].toUpperCase()+" "+month_short[now.getMonth()]+" "+now.getDate()
+                td.date= now.getMonth()+1+"/"+now.getDate()
                 each user in users
                     each shift, shInd in shifts
                         - var st = new Date(shift.start_time);
@@ -53,15 +53,15 @@ table#schedule.table.table-bordered.table-condensed
 table#requests.table.table-bordered.table-condensed(style={display: "none"})
     thead
         tr.users
-            th.date Date
+            th.date
             each val, index in users
-                th.user(style={width:100/(users.length+1) + "%"})=val.first_name + " "
+                th.user(style={width:100/(users.length+1) + "%"})=val.first_name
                     .name=val.last_name.toUpperCase()
     tbody
         while n < schedule.daysCount
             - var now = new Date(start.getFullYear(),start.getMonth(), start.getDate() + n)
             tr.day(class=weekday[now.getDay()])
-                td.date= weekday[now.getDay()].toUpperCase()+" "+month_short[now.getMonth()]+" "+now.getDate()
+                td.date= now.getMonth()+1+"/"+now.getDate()
                 each user in users
                     each request, reqInd in requests
                         - var st = new Date(request.start_time);

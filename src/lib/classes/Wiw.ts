@@ -21,31 +21,6 @@ export class Wiw {
     }
 
     // Methods
-    // private
-    private wiwGet(endpoint: string, qs: object, done: (err: Error | string, data?: Wiw.ShiftsResponseObjectType | Wiw.PositionsResponseObjectType) => void): void {
-        const token = this.token;
-        request.get(baseUrl + endpoint,
-        {
-            json: true,
-            headers: {
-                "W-Token": token
-            },
-            qs: qs
-        }, function(error, response, html) {
-            const body = html;
-
-            if (error) {  done(error); }
-
-            if (body.error) {  done(body.error); }
-
-            body.token = token;
-            
-            done(undefined, body);
-            
-        });
-    }
-    
-    // Methods
     // public
     
     //////////////////
@@ -79,11 +54,9 @@ export class Wiw {
     public getSchedule(options: ScheduleOptions, done: (err: Error | string, data?: Wiw.ShiftsResponseObjectType | Wiw.PositionsResponseObjectType) => void): void {
         this.wiwGet("shifts/", options, (error, shifts) => {
             this.wiwGet("schedule/", options, (error, schedule) => {
-                this.wiwGet("positions/", options, (error, positions) => {
-                    shifts.requests = schedule.requests;
-                    shifts.positions = positions.positions;
-                    done(error, shifts);
-                });
+                shifts.users = this.sortUsers(shifts.users);
+                shifts.requests = schedule.requests;
+                done(error, shifts);
             });
             
         });
@@ -120,6 +93,38 @@ export class Wiw {
         this.token = token;
     }
     
+    // Methods
+    // private
+    private wiwGet(endpoint: string, qs: object, done: (err: Error | string, data?: Wiw.ShiftsResponseObjectType | Wiw.PositionsResponseObjectType) => void): void {
+        const token = this.token;
+        request.get(baseUrl + endpoint,
+        {
+            json: true,
+            headers: {
+                "W-Token": token
+            },
+            qs: qs
+        }, function(error, response, html) {
+            const body = html;
+
+            if (error) {  done(error); }
+
+            if (body.error) {  done(body.error); }
+
+            body.token = token;
+            
+            done(undefined, body);
+            
+        });
+    }
+    
+    private sortUsers(users: UserObjectType[]): UserObjectType[] {
+        const sortedUsers: UserObjectType[] = [];
+        for (const user of users) {
+            sortedUsers[user.sort[user.locations[0] + ""] - 1] = user;
+        }
+        return sortedUsers;
+    }
 }
 
 
@@ -167,6 +172,7 @@ export namespace Wiw {
         end: string,
         requests: RequestObjectType[],
         daysCount: number,
+        users: UserObjectType[];
         positions: PositionObjectType[]
     };
     
@@ -578,6 +584,7 @@ type UserObjectType = {
     position_rates: number[],
     locations: number[],
     country_code: string,
+    sort: any,
     is_internal_login: boolean,
     unacknowledged: number[]
 };

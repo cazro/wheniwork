@@ -63,15 +63,20 @@ textarea {
 $weekend: #dedede;
 
 .date {
+    color: #000000;
     font-weight:bold;
-    font-size: 1.1em;
+    font-size: 1.8em;
     width: 7em;
 }
 
-.name {
-    font-size: 1.2em;
-    font-weight: bold;
+.user {
+    color: #000000;
+    .name {
+        font-size: 1.8em;
+        font-weight: bold;
+    }
 }
+
 .shift {
     border-radius: 3px;
     height:100%;
