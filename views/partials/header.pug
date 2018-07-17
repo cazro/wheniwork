@@ -11,12 +11,12 @@
         i.fa.fa-calendar
         | When I Work - IBA
     .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        li#gotoSchedule(class=(title == 'Schedule') ? 'active' : undefined)
-          a(href='#') Schedule
-        li#gotoRequests(class=(title == 'Requests') ? 'active' : undefined)
-          a(href='#') Requests
-        
+      if user
+        ul.nav.navbar-nav
+          li#gotoSchedule(class=(title == 'Schedule') ? 'active' : undefined)
+            a(href='#') Schedule
+          li#gotoRequests(class=(title == 'Requests') ? 'active' : undefined)
+            a(href='#') Requests
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
