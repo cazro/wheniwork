@@ -61,16 +61,17 @@ textarea {
 // -------------------------
 //$weekend: lighten($brand-primary, 40%);
 $weekend: #dedede;
+$bigTextColor: #000000;
 
 .date {
-    color: #000000;
+    color: $bigTextColor;
     font-weight:bold;
     font-size: 1.8em;
     width: 7em;
 }
 
 .user {
-    color: #000000;
+    color: $bigTextColor;
     .name {
         font-size: 1.8em;
         font-weight: bold;
@@ -82,16 +83,13 @@ $weekend: #dedede;
     height:100%;
     
     p {
-        color: #000;
-        font-size:1.2em;
+        color: $bigTextColor;
+        font-size: 1.2em;
         font-weight: bolder;
         text-align: center;
         margin: 0 0 0 0px;
+        line-height: 2em;
     }
-}
-
-.user,.shift {
-
 }
 
 .table {
