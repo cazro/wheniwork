@@ -2,6 +2,7 @@ extends layout
 
 block content
   if user
+    script(src='/js/shifts.js')
     #mainContainer
         include partials/schedule/shifts
   else
