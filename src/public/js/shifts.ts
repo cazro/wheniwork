@@ -2,6 +2,8 @@ const refreshTime = 60; // in minutes
 const aniTransTimes = 50;
 
 
+// FUNCTION TO UPDATE SCHEDULE/REQUESTS
+
 function update(parameters: any): void {
     
     if (parameters) {
@@ -10,18 +12,24 @@ function update(parameters: any): void {
         parameters = {update: true};
     }
     
+    // FADE TABLE WHILE UPDATING
     $("#mainContainer").addClass("updating");
     
     $.get("/", parameters, function(data: string) {
+        
+        // SET NEW SCHEDULE TO CONTAINER
         $("#mainContainer").html(data);
             
+        // RESETTING SCHEDULE/REQUESTS BUTTONS
         $("#gotoRequests").removeClass("active");
         $("#gotoSchedule").addClass("active");
 
+        // BRING BACK FOCUS TO TABLE
         $("#mainContainer").removeClass("updating");
        
     });
 }
+
 
 $(document).ready(function() {
     
@@ -31,6 +39,7 @@ $(document).ready(function() {
     
     let yScrollPos: number = undefined;
     
+    // CHANGING LOCATION
     $("#location").on("click", function() {
         const parameters = {
             location: $(this).data("location")
@@ -41,6 +50,8 @@ $(document).ready(function() {
         update(parameters);
     });
     
+    
+    // CHANGING TO REQUESTS
     $("#gotoRequests").on("click", function() {
         $("#gotoSchedule").removeClass("active");
         $(this).addClass("active");
@@ -53,6 +64,8 @@ $(document).ready(function() {
         });
     });
     
+    
+    // CHANGING TO SCHEDULE
     $("#gotoSchedule").on("click", function() {
         $("#gotoRequests").removeClass("active");
         $(this).addClass("active");
@@ -63,8 +76,5 @@ $(document).ready(function() {
         $("#schedule").show(aniTransTimes, function() {
             $(window).scrollTop(yScrollPos);
         });
-        
     });
-    
-    
 });
