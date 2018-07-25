@@ -25,10 +25,10 @@ export let getHome = (req: Request, res: Response) => {
         //  START / END Times
         const now = new Date();
         
-        let start = req.params.start;
+        let start = req.query.start;
         if (!start) start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-        let end = req.params.end;
+        let end = req.query.end;
         if (!end) end = new Date(start.getFullYear(), start.getMonth() + 2, start.getDate());
     
         // GETTING SHIFTS
@@ -55,6 +55,10 @@ export let getHome = (req: Request, res: Response) => {
             }
         });
     } else {
-        res.render("home", { title: "Login", schedule: undefined});
+        if (req.query.update) {
+            res.redirect("/");
+        } else {
+            res.render("home", { title: "Login", schedule: undefined});
+        }
     }
 };

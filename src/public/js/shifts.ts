@@ -1,4 +1,4 @@
-const refreshTime = 60; // in minutes
+const refreshTime = 20; // in minutes
 const aniTransTimes = 50;
 
 

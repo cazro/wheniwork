@@ -109,11 +109,16 @@ export class Wiw {
 
             if (error) {  done(error); }
 
-            if (body.error) {  done(body.error); }
+            if (body && body.error) {  done(body.error); }
 
-            body.token = token;
-            
-            done(undefined, body);
+            if (!body) {
+                done(response ? response.statusMessage : "ERROR");
+            } else {
+                 
+                body.token = token;
+
+                done(undefined, body);
+            }
             
         });
     }
