@@ -136,7 +136,6 @@ export class Wiw {
             }
             count++;
         });
-        console.log(sortedUsers);
         return sortedUsers;
     }
 }
