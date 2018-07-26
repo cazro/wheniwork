@@ -126,8 +126,17 @@ export class Wiw {
     private sortUsers(users: UserObjectType[]): UserObjectType[] {
         const sortedUsers: UserObjectType[] = [];
         for (const user of users) {
-            sortedUsers[user.sort[user.locations[0] + ""] - 1] = user;
+            const sortPos = user.sort[user.locations[0] + ""];
+            sortedUsers[sortPos - 1] = user;
         }
+        let count = 0;
+        sortedUsers.forEach((item, index) => {
+            if (!sortedUsers[count]) {
+                sortedUsers.splice(count, 1);
+            }
+            count++;
+        });
+        console.log(sortedUsers);
         return sortedUsers;
     }
 }

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Wiw } from "../lib/classes/Wiw";
+import { default as logger } from "../util/logger";
 
 const wiw = new Wiw();
 
@@ -47,7 +48,7 @@ export let getHome = (req: Request, res: Response) => {
             const daysCount = Math.floor((Date.parse(schedule.end) - Date.parse(schedule.start)) / 86400000);
            
             schedule.daysCount = daysCount;
-            
+                        
             if (req.query.update) {
                 res.render("partials/schedule/shifts", {schedule: schedule});
             } else {
