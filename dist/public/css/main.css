@@ -9130,6 +9130,10 @@ body {
   padding-top: 60px;
   margin-bottom: 75px; }
 
+.container-fluid {
+  padding-left: 5px;
+  padding-right: 5px; }
+
 footer {
   position: absolute;
   bottom: 0;
