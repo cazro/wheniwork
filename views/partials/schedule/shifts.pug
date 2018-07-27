@@ -14,10 +14,10 @@ table#schedule.table.table-bordered.table-condensed
     thead
         tr.users
             th.date
-            each val, index in users
-                if val
-                    th.user(style={width:100/(users.length+1) + "%"})=val.first_name + " "
-                        .name=val.last_name.toUpperCase()
+            each user, index in users
+                if user
+                    th.user(style={width:100/(users.length+1) + "%"})= user.first_name
+                        .name= user.last_name.toUpperCase()
     tbody
         while n < schedule.daysCount
             - var now = new Date(start.getFullYear(),start.getMonth(), start.getDate() + n)
@@ -56,10 +56,10 @@ table#requests.table.table-bordered.table-condensed(style={display: "none"})
     thead
         tr.users
             th.date
-            each val, index in users
-                if val
-                    th.user(style={width:100/(users.length+1) + "%"})=val.first_name
-                        .name=val.last_name.toUpperCase()
+            each user, index in users
+                if user
+                    th.user(style={width:100/(users.length+1) + "%"})=user.first_name
+                        .name=user.last_name.toUpperCase()
     tbody
         while n < schedule.daysCount
             - var now = new Date(start.getFullYear(),start.getMonth(), start.getDate() + n)
