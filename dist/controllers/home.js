@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const Wiw_1 = require("../lib/classes/Wiw");
+const logger_1 = __importDefault(require("../util/logger"));
 const wiw = new Wiw_1.Wiw();
 /**
  * GET /
@@ -49,7 +53,8 @@ exports.getHome = (req, res) => {
     }
     else {
         if (req.query.update) {
-            res.redirect("/");
+            logger_1.default.info("Update requested but not authorized.");
+            res.render("partials/login-form");
         }
         else {
             res.render("home", { title: "Login", schedule: undefined });

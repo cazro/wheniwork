@@ -23,6 +23,9 @@ function update(parameters) {
 $(document).ready(function () {
     const updateInterval = setInterval(update, refreshTime * 60 * 1000);
     $("#requests").hide();
+    setTimeout(function () {
+        $(".alert").hide(150);
+    }, 7500);
     let yScrollPos = undefined;
     // CHANGING LOCATION
     $("#location").on("click", function () {

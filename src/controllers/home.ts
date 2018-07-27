@@ -57,7 +57,8 @@ export let getHome = (req: Request, res: Response) => {
         });
     } else {
         if (req.query.update) {
-            res.redirect("/");
+            logger.info("Update requested but not authorized.");
+            res.render("partials/login-form");
         } else {
             res.render("home", { title: "Login", schedule: undefined});
         }
