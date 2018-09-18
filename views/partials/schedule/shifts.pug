@@ -34,14 +34,13 @@ table#schedule.table.table-bordered.table-condensed
                             if shift.user_id == user.id && shiftDate.toDateString() == now.toDateString()
                                 each position in positions
                                     if position.id == shift.position_id
+                                        - var et = new Date(shift.end_time);
                                         - var color = shift.color;
                                         - var r = parseInt(color.substring(0,2),16);
                                         - var g = parseInt(color.substring(2,4),16);
                                         - var b = parseInt(color.substring(4,6),16);
-                                        td.shift(style={background: "rgba("+r+","+g+","+b+",0.5)"})
+                                        td.shift(title=st.getHours()+"-"+et.getHours(),style={background: "rgba("+r+","+g+","+b+",0.5)"})
                                             p= position.name.toUpperCase()
-                                            //.shift(style={background: "rgba("+r+","+g+","+b+",0.5)"})
-                                                //p= position.name.toUpperCase()
                                         - shifts.splice(shInd,1);
                                         - found = true;
                                         - break;
